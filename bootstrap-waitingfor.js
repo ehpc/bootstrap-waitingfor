@@ -53,6 +53,6 @@ var waitingDialog = (function ($) {
 		hide: function () {
 			$dialog.modal('hide');
 		}
-	}
+	};
 
 })(jQuery);
