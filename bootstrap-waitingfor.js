@@ -4,7 +4,8 @@
  * @author Eugene Maslovich <ehpc@em42.ru>
  */
 
-var waitingDialog = (function ($) {
+var waitingDialog = waitingDialog || (function ($) {
+	'use strict';
 
 	// Creating modal dialog's DOM
 	var $dialog = $(
@@ -27,15 +28,15 @@ var waitingDialog = (function ($) {
 		 */
 		show: function (message, options) {
 			// Assigning defaults
+			if (typeof options === 'undefined') {
+				options = {};
+			}
 			var settings = $.extend({
 				dialogSize: 'm',
 				progressType: ''
 			}, options);
 			if (typeof message === 'undefined') {
 				message = 'Loading';
-			}
-			if (typeof options === 'undefined') {
-				options = {};
 			}
 			// Configuring dialog
 			$dialog.find('.modal-dialog').attr('class', 'modal-dialog').addClass('modal-' + settings.dialogSize);
