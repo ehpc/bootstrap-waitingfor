@@ -121,7 +121,7 @@ var waitingDialog = waitingDialog || (function ($) {
 		 * Closes dialog
 		 */
 		hide: function () {
-			if ($dialog != undefined) {
+			if (typeof $dialog !== 'undefined') {
 				$dialog.modal('hide');
 			}
 		}
