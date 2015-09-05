@@ -1,0 +1,62 @@
+var expect = chai.expect;
+
+describe('Dialog testing', function () {
+
+	var headerSelector = 'body > div.modal > div > div > div.modal-header > h3',
+		modalBodySelector = 'body > div.modal > div > div > div.modal-body',
+		modalSelector = 'body > div.modal';
+
+	describe('Simple dialog', function () {
+
+		it('displays a dialog with a progress bar', function (done) {
+			waitingDialog.show();
+			setTimeout(function () {
+				expect($(headerSelector).text()).to.equal('Loading');
+				waitingDialog.hide();
+				done();
+			}, 700);
+		});
+
+		it('displays a dialog with a custom message and a progress bar', function (done) {
+			setTimeout(function () {
+				waitingDialog.show('Custom message');
+				setTimeout(function () {
+					expect($(headerSelector).text()).to.equal('Custom message');
+					waitingDialog.hide();
+					done();
+				}, 700);
+			}, 300);
+		});
+
+		it('displays a dialog with custom settings and a progress bar', function (done) {
+			setTimeout(function () {
+				waitingDialog.show('Custom message 2', {
+					dialogSize: 'sm', 
+					progressType: 'warning'
+				});
+				setTimeout(function () {
+					expect($(modalBodySelector).find('.progress-bar-warning').length).to.equal(1);
+					expect($(headerSelector).text()).to.equal('Custom message 2');
+					waitingDialog.hide();
+					done();
+				}, 700);
+			}, 300);
+		});
+
+		it('displays a dialog with a special onHide event', function (done) {
+			setTimeout(function () {
+				waitingDialog.show('Custom message 3', {
+					onHide: function () {
+						expect($(modalSelector).is(':visible')).to.be.false;
+						done();
+					}
+				});
+				setTimeout(function () {
+					expect($(headerSelector).text()).to.equal('Custom message 3');
+					waitingDialog.hide();
+				}, 700);
+			}, 300);
+		});
+
+	});
+});
