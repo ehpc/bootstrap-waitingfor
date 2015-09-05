@@ -11,7 +11,7 @@ See this plugin in action:rocket:: http://bootsnipp.com/snippets/featured/quotwa
 
 ##Using
 
-You can install this module with bower `bower install bootstrap-waitingfor` and include files inside the `build` directory.
+You can install this module with bower `bower install bootstrap-waitingfor` and include the files from `build` directory.
 
 In your javascript code write something like this:
 ```js
