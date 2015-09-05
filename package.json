@@ -1,0 +1,32 @@
+{
+  "name": "bootstrap-waitingfor",
+  "version": "1.0.0",
+  "description": "Waiting for dialog with progress bar for Bootstrap",
+  "main": "build/bootstrap-waitingfor.js",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "3.9.0",
+    "gulp-rename": "1.2.2",
+    "gulp-uglify": "1.4.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ehpc/bootstrap-waitingfor.git"
+  },
+  "keywords": [
+    "waiting",
+    "dialog",
+    "progress",
+    "bar",
+    "boostrap"
+  ],
+  "author": "Eugene Maslovich <ehpc@ehpc.io> (http://ehpc.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ehpc/bootstrap-waitingfor/issues"
+  },
+  "homepage": "https://github.com/ehpc/bootstrap-waitingfor#readme"
+}
