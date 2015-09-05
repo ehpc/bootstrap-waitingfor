@@ -3,7 +3,6 @@
  *
  * @author Eugene Maslovich <ehpc@em42.ru>
  */
-
 var waitingDialog = waitingDialog || (function ($) {
 	'use strict';
 

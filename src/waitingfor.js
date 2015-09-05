@@ -3,7 +3,6 @@
  *
  * @author Eugene Maslovich <ehpc@em42.ru>
  */
-
 var waitingDialog = waitingDialog || (function ($) {
 	'use strict';
 
@@ -110,7 +109,7 @@ var waitingDialog = waitingDialog || (function ($) {
 
 			// Adding callbacks
 			if (typeof settings.onHide === 'function') {
-				$dialog.off('hidden.bs.modal').on('hidden.bs.modal', function (e) {
+				$dialog.off('hidden.bs.modal').on('hidden.bs.modal', function () {
 					settings.onHide.call($dialog);
 				});
 			}
