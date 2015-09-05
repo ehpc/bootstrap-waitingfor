@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "homepage": "https://github.com/ehpc/bootstrap-waitingfor",
   "authors": [
-    "ehpc <ehpc@em42.ru>"
+    "Eugene Maslovich <ehpc@ehpc.io>"
   ],
   "description": "Waiting for dialog with progress bar for Bootstrap",
   "main": "src/boostrap-waitingfor.js",

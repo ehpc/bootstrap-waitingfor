@@ -3,7 +3,20 @@
  *
  * @author Eugene Maslovich <ehpc@em42.ru>
  */
-var waitingDialog = waitingDialog || (function ($) {
+
+(function (root, factory) {
+	'use strict';
+
+	if (typeof define === 'function' && define.amd) {
+		define(['jquery'], function ($) {
+			return (root.waitingDialog = factory($));
+		});
+	}
+	else {
+		root.waitingDialog = root.waitingDialog || factory(root.jQuery);
+	}
+
+}(this, function ($) {
 	'use strict';
 
 	/**
@@ -127,4 +140,5 @@ var waitingDialog = waitingDialog || (function ($) {
 		}
 	};
 
-})(jQuery);
+}));
+

@@ -48,8 +48,6 @@
         "try",
         "catch"
     ],
-    "requireSpacesInsideObjectBrackets": "all",
-    "requireSpacesInsideBrackets": true,
     "requireSemicolons": true,
     "requireSpacesInConditionalExpression": true,
     "requireSpaceAfterBinaryOperators": true,
