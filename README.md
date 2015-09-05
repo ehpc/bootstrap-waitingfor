@@ -1,6 +1,8 @@
 #bootstrap-waitingfor
 
-"Waiting for..." modal dialog with progress bar for Bootstrap
+"Waiting for..." modal dialog with progress bar for Bootstrap.
+
+See this plugin in action:rocket:: http://bootsnipp.com/snippets/featured/quotwaiting-forquot-modal-dialog
 
 ##Features
 
@@ -37,8 +39,6 @@ Setting up the environment:
 2. Run `bower install`
 
 ##Examples
-
-See this plugin in action:rocket:: http://bootsnipp.com/snippets/featured/quotwaiting-forquot-modal-dialog
 
 HTML page example:
 ```html
