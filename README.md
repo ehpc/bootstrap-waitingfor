@@ -2,7 +2,7 @@
 
 "Waiting for..." modal dialog with progress bar for Bootstrap
 
-###Features
+##Features
 
 * AMD-compatible
 * Configurable
