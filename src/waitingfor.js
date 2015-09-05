@@ -38,16 +38,17 @@ var waitingDialog = waitingDialog || (function ($) {
 		 * Opens our dialog
 		 * @param message Custom message
 		 * @param options Custom options:
-		 *				  options.headerText - if the option is set to boolean false, 
-		 *				  	it will hide the header and "message" will be set in a paragraph above the progress bar.
-		 *				  	When headerText is a not-empty string, "message" becomes a content 
-		 *				  	above the progress bar and headerText string will be set as a text inside the H3;
-		 *				  options.headerSize - this will generate a heading corresponding to the size number. Like <h1>, <h2>, <h3> etc;
-		 *				  options.headerClass - extra class(es) for the header tag;
-		 *				  options.dialogSize - bootstrap postfix for dialog size, e.g. "sm", "m";
-		 *				  options.progressType - bootstrap postfix for progress bar type, e.g. "success", "warning";
-		 *				  options.contentElement - determines the tag of the content element. Defaults to "p", which will generate a <p> tag;
-		 *				  options.contentClass - extra class(es) for the content tag.
+		 *   options.headerText - if the option is set to boolean false, 
+		 *     it will hide the header and "message" will be set in a paragraph above the progress bar.
+		 *     When headerText is a not-empty string, "message" becomes a content 
+		 *     above the progress bar and headerText string will be set as a text inside the H3;
+		 *   options.headerSize - this will generate a heading corresponding to the size number. Like <h1>, <h2>, <h3> etc;
+		 *   options.headerClass - extra class(es) for the header tag;
+		 *   options.dialogSize - bootstrap postfix for dialog size, e.g. "sm", "m";
+		 *   options.progressType - bootstrap postfix for progress bar type, e.g. "success", "warning";
+		 *   options.contentElement - determines the tag of the content element. 
+		 *     Defaults to "p", which will generate a <p> tag;
+		 *   options.contentClass - extra class(es) for the content tag.
 		 */
 		show: function (message, options) {
 			// Assigning defaults
@@ -68,7 +69,7 @@ var waitingDialog = waitingDialog || (function ($) {
 				onHide: null // This callback runs after the dialog was hidden
 			}, options),
 			$headerTag, $contentTag;
-			
+
 			$dialog = constructDialog($dialog);
 
 			// Configuring dialog
@@ -78,14 +79,14 @@ var waitingDialog = waitingDialog || (function ($) {
 				$dialog.find('.progress-bar').addClass('progress-bar-' + settings.progressType);
 			}
 
-			// generate header tag
+			// Generate header tag
 			$headerTag = $('<h' + settings.headerSize + ' />');
 			$headerTag.css({ 'margin': 0 });
 			if (settings.headerClass) {
 				$headerTag.addClass(settings.headerClass);
 			}
 
-			// generate content tag
+			// Generate content tag
 			$contentTag = $('<' + settings.contentElement + ' />');
 			if (settings.contentClass) {
 				$contentTag.addClass(settings.contentClass);
