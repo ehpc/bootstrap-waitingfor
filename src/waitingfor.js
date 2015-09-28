@@ -79,7 +79,8 @@
 				progressType: '',
 				contentElement: 'p',
 				contentClass: 'content',
-				onHide: null // This callback runs after the dialog was hidden
+				onHide: null, // This callback runs after the dialog was hidden
+				onShow: null // This callback runs after the dialog was shown
 			}, options),
 			$headerTag, $contentTag;
 
@@ -125,6 +126,11 @@
 			if (typeof settings.onHide === 'function') {
 				$dialog.off('hidden.bs.modal').on('hidden.bs.modal', function () {
 					settings.onHide.call($dialog);
+				});
+			}
+			if (typeof settings.onShow === 'function') {
+				$dialog.off('shown.bs.modal').on('shown.bs.modal', function () {
+					settings.onShow.call($dialog);
 				});
 			}
 			// Opening dialog
