@@ -58,5 +58,22 @@ describe('Dialog testing', function () {
 			}, 300);
 		});
 
+		it('displays a dialog with a special onShow event', function (done) {
+			setTimeout(function () {
+				waitingDialog.show('Custom message 4', {
+					onShow: function () {
+						expect($(modalSelector).is(':visible')).to.be.true;
+					}
+				});
+				setTimeout(function () {
+					expect($(headerSelector).text()).to.equal('Custom message 4');
+					waitingDialog.hide();
+					done();
+				}, 700);
+			}, 300);
+		});
+
+
+
 	});
 });
