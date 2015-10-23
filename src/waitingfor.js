@@ -5,146 +5,152 @@
  */
 
 (function (root, factory) {
-	'use strict';
+    'use strict';
 
-	if (typeof define === 'function' && define.amd) {
-		define(['jquery'], function ($) {
-			return (root.waitingDialog = factory($));
-		});
-	}
-	else {
-		root.waitingDialog = root.waitingDialog || factory(root.jQuery);
-	}
+    if (typeof define === 'function' && define.amd) {
+        define(['jquery'], function ($) {
+            return (root.waitingDialog = factory($));
+        });
+    }
+    else {
+        root.waitingDialog = root.waitingDialog || factory(root.jQuery);
+    }
 
 }(this, function ($) {
-	'use strict';
+    'use strict';
 
-	/**
-	 * Dialog DOM constructor
-	 */
-	function constructDialog($dialog) {
-		// Deleting previous incarnation of the dialog
-		if ($dialog) {
-			$dialog.remove();
-		}
-		return $(
-			'<div class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top:15%; overflow-y:visible;">' +
-				'<div class="modal-dialog modal-m">' +
-					'<div class="modal-content">' +
-						'<div class="modal-header" style="display: none;"></div>' +
-						'<div class="modal-body">' +
-							'<div class="progress progress-striped active" style="margin-bottom:0;">' +
-								'<div class="progress-bar" style="width: 100%"></div>' +
-							'</div>' +
-						'</div>' +
-					'</div>' +
-				'</div>' +
-			'</div>'
-		);
-	}
+    /**
+     * Dialog DOM constructor
+     */
+    function constructDialog($dialog) {
+        // Deleting previous incarnation of the dialog
+        if ($dialog) {
+            $dialog.remove();
+        }
+        return $(
+            '<div class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="overflow-y:visible;">' +
+                '<div class="modal-dialog modal-m">' +
+                    '<div class="modal-content">' +
+                        '<div class="modal-header"></div>' +
+                        '<div class="modal-body"></div>' +
+                    '</div>' +
+                '</div>' +
+            '</div>'
+        );
+    }
 
-	// Dialog object
-	var $dialog;
+    // Creating modal dialog's DOM
+    var $dialog;
 
-	return {
-		/**
-		 * Opens our dialog
-		 * @param message Custom message
-		 * @param options Custom options:
-		 *   options.headerText - if the option is set to boolean false, 
-		 *     it will hide the header and "message" will be set in a paragraph above the progress bar.
-		 *     When headerText is a not-empty string, "message" becomes a content 
-		 *     above the progress bar and headerText string will be set as a text inside the H3;
-		 *   options.headerSize - this will generate a heading corresponding to the size number. Like <h1>, <h2>, <h3> etc;
-		 *   options.headerClass - extra class(es) for the header tag;
-		 *   options.dialogSize - bootstrap postfix for dialog size, e.g. "sm", "m";
-		 *   options.progressType - bootstrap postfix for progress bar type, e.g. "success", "warning";
-		 *   options.contentElement - determines the tag of the content element. 
-		 *     Defaults to "p", which will generate a <p> tag;
-		 *   options.contentClass - extra class(es) for the content tag.
-		 */
-		show: function (message, options) {
-			// Assigning defaults
-			if (typeof options === 'undefined') {
-				options = {};
-			}
-			if (typeof message === 'undefined') {
-				message = 'Loading';
-			}
-			var settings = $.extend({
-				headerText: '',
-				headerSize: 3,
-				headerClass: '',
-				dialogSize: 'm',
-				progressType: '',
-				contentElement: 'p',
-				contentClass: 'content',
-				onHide: null, // This callback runs after the dialog was hidden
-				onShow: null // This callback runs after the dialog was shown
-			}, options),
-			$headerTag, $contentTag;
+    return {
+        /**
+         * Opens our dialog
+         * @param message Custom message
+         * @param options Custom options:
+         *   options.headerText - if the option is set to boolean false,
+         *     it will hide the header and "message" will be set in a paragraph above the progress bar.
+         *     When headerText is a not-empty string, "message" becomes a content
+         *     above the progress bar and headerText string will be set as a text inside the H3;
+         *   options.headerSize - this will generate a heading corresponding to the size number. Like <h1>, <h2>, <h3> etc;
+         *   options.headerClass - extra class(es) for the header tag;
+         *   options.dialogSize - bootstrap postfix for dialog size, e.g. "sm", "m";
+         *   options.progressType - bootstrap postfix for progress bar type, e.g. "success", "warning";
+         *   options.contentElement - determines the tag of the content element.
+         *     Defaults to "p", which will generate a <p> tag;
+         *   options.contentClass - extra class(es) for the content tag.
+         */
+        show: function (message, options) {
+            // Assigning defaults
+            if (typeof options === 'undefined') {
+                options = {};
+            }
+            if (typeof message === 'undefined') {
+                message = 'Loading';
+            }
+            var settings = $.extend({
+                headerText: '',
+                headerSize: 3,
+                headerClass: '',
+                dialogSize: 'm',
+                progressType: '',
+                contentElement: 'p',
+                contentClass: 'content',
+                onHide: null // This callback runs after the dialog was hidden
+            }, options),
+            $headerTag, $contentTag, $progressBar;
 
-			$dialog = constructDialog($dialog);
+            $dialog = constructDialog($dialog);
 
-			// Configuring dialog
-			$dialog.find('.modal-dialog').attr('class', 'modal-dialog').addClass('modal-' + settings.dialogSize);
-			$dialog.find('.progress-bar').attr('class', 'progress-bar');
-			if (settings.progressType) {
-				$dialog.find('.progress-bar').addClass('progress-bar-' + settings.progressType);
-			}
+            // Configuring dialog
+            $dialog.find('.modal-dialog').attr('class', 'modal-dialog').addClass('modal-' + settings.dialogSize);
 
-			// Generate header tag
-			$headerTag = $('<h' + settings.headerSize + ' />');
-			$headerTag.css({ 'margin': 0 });
-			if (settings.headerClass) {
-				$headerTag.addClass(settings.headerClass);
-			}
+            // Generate header tag
+            $headerTag = $('<h' + settings.headerSize + ' />');
+            $headerTag.css({ 'margin-bottom': 0 });
+            if (settings.headerClass.length > 0) {
+                $headerTag.addClass(settings.headerClass);
+            }
 
-			// Generate content tag
-			$contentTag = $('<' + settings.contentElement + ' />');
-			if (settings.contentClass) {
-				$contentTag.addClass(settings.contentClass);
-			}
+            // Generate content tag
+            $contentTag = $('<' + settings.contentElement + ' />');
+            if (settings.contentClass.length > 0) {
+                $contentTag.addClass(settings.contentClass);
+            }
 
-			if (settings.headerText === false) {
-				$contentTag.html(message);
-				$dialog.find('.modal-body').prepend($contentTag);
-			}
-			else if (settings.headerText) {
-				$headerTag.html(settings.headerText);
-				$dialog.find('.modal-header').html($headerTag).show();
+            // Reset header and body content
+            $dialog.find('.modal-header').html('').hide();
+            $dialog.find('.modal-body').html('');
 
-				$contentTag.html(message);
-				$dialog.find('.modal-body').prepend($contentTag);
-			}
-			else {
-				$headerTag.html(message);
-				$dialog.find('.modal-header').html($headerTag).show();
-			}
+            // Figure out new header/content
+            if (settings.headerText === false) {
+                $contentTag.html(message);
+                $dialog.find('.modal-body').html($contentTag);
+            }
+            else if (settings.headerText.length > 0) {
+                $headerTag.html(settings.headerText);
+                $dialog.find('.modal-header').show().html($headerTag);
 
-			// Adding callbacks
-			if (typeof settings.onHide === 'function') {
-				$dialog.off('hidden.bs.modal').on('hidden.bs.modal', function () {
-					settings.onHide.call($dialog);
-				});
-			}
-			if (typeof settings.onShow === 'function') {
-				$dialog.off('shown.bs.modal').on('shown.bs.modal', function () {
-					settings.onShow.call($dialog);
-				});
-			}
-			// Opening dialog
-			$dialog.modal();
-		},
-		/**
-		 * Closes dialog
-		 */
-		hide: function () {
-			if (typeof $dialog !== 'undefined') {
-				$dialog.modal('hide');
-			}
-		}
-	};
+                $contentTag.html(message);
+                $dialog.find('.modal-body').html($contentTag);
+            }
+            else {
+                $headerTag.html(message);
+                $dialog.find('.modal-header').show().html($headerTag);
+            }
 
+            // Add in progress bar
+            $progressBar = $(
+                '<div class="progress progress-striped active" style="margin-bottom:0;">' +
+                    '<div class="progress-bar" style="width: 100%"></div>' +
+                '</div>'
+            );
+            if (settings.progressType) {
+                $progressBar.find('.progress-bar').addClass('progress-bar-' + settings.progressType);
+            }
+            $dialog.find('.modal-body').append($progressBar);
+
+            // Adding callbacks
+            if (typeof settings.onHide === 'function') {
+                $dialog.off('hidden.bs.modal').on('hidden.bs.modal', function () {
+                    settings.onHide.call($dialog);
+                });
+            }
+            if (typeof settings.onShow === 'function') {
+                $dialog.off('shown.bs.modal').on('shown.bs.modal', function () {
+                    settings.onShow.call($dialog);
+                });
+            }
+
+            // Opening dialog
+            $dialog.modal();
+        },
+        /**
+         * Closes dialog
+         */
+        hide: function () {
+            if (typeof $dialog !== 'undefined') {
+                $dialog.modal('hide');
+            }
+        }
+    };
 }));
-
