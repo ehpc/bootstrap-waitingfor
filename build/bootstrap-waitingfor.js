@@ -79,7 +79,8 @@
 				progressType: '',
 				contentElement: 'p',
 				contentClass: 'content',
-				onHide: null // This callback runs after the dialog was hidden
+				onHide: null, // This callback runs after the dialog was hidden
+				onShow: null // This callback runs after the dialog was shown
 			}, options),
 			$headerTag, $contentTag;
 
@@ -127,6 +128,11 @@
 					settings.onHide.call($dialog);
 				});
 			}
+			if (typeof settings.onShow === 'function') {
+				$dialog.off('shown.bs.modal').on('shown.bs.modal', function () {
+					settings.onShow.call($dialog);
+				});
+			}
 			// Opening dialog
 			$dialog.modal();
 		},
@@ -137,7 +143,20 @@
 			if (typeof $dialog !== 'undefined') {
 				$dialog.modal('hide');
 			}
-		}
+		},
+		/**
+		 * Changes or displays current dialog message
+		 */
+		message: function (newMessage) {
+			if (typeof $dialog !== 'undefined') {
+				if (typeof newMessage !== 'undefined') {
+					return $dialog.find('.modal-header>h3').html(newMessage);
+				}
+				else {
+					return $dialog.find('.modal-header>h3').html();
+				}
+			}
+		}	
 	};
 
 }));

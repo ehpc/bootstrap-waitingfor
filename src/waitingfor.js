@@ -143,7 +143,20 @@
 			if (typeof $dialog !== 'undefined') {
 				$dialog.modal('hide');
 			}
-		}
+		},
+		/**
+		 * Changes or displays current dialog message
+		 */
+		message: function (newMessage) {
+			if (typeof $dialog !== 'undefined') {
+				if (typeof newMessage !== 'undefined') {
+					return $dialog.find('.modal-header>h3').html(newMessage);
+				}
+				else {
+					return $dialog.find('.modal-header>h3').html();
+				}
+			}
+		}	
 	};
 
 }));
