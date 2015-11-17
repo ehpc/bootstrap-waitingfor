@@ -215,7 +215,7 @@
 			
 			
 		},
-		/*
+		/**
 		* stop job with specified id .
 		   if no id specified , stopAnimate will stop the last running job . 
 		*@param id
@@ -228,7 +228,7 @@
 			 delete cache.animate[cache.animate.indexOf(id)];
 			return $dialog;
 		},
-		/*
+		/**
 		* @param percentOrCurrent
 		* @param total
 		* Calling with : 
