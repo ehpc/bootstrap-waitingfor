@@ -45,7 +45,7 @@
 
 	// Dialog object
 	var $dialog;
-
+        var config;
 	return {
 		/**
 		 * Opens our dialog
@@ -82,7 +82,7 @@
 				onHide: null // This callback runs after the dialog was hidden
 			}, options),
 			$headerTag, $contentTag;
-
+                        config=  settings;
 			$dialog = constructDialog($dialog);
 
 			// Configuring dialog
@@ -144,10 +144,10 @@
 		message: function (newMessage) {
 			if (typeof $dialog !== 'undefined') {
 				if (typeof newMessage !== 'undefined') {
-					return $dialog.find('.modal-header>h'+settings.headerSize).html(newMessage);
+					return $dialog.find('.modal-header>h'+config.headerSize).html(newMessage);
 				}
 				else {
-					return $dialog.find('.modal-header>h'+settings.headerSize).html();
+					return $dialog.find('.modal-header>h'+config.headerSize).html();
 				}
 			}
 		}
@@ -190,11 +190,11 @@
 			if(typeof messages ==="function"){
 				if(timeout<timer){
 				        setTimeout(function(){
-					     messages.call($dialog,$dialog.find('.modal-header>h'+settings.headerSize))
+					     messages.call($dialog,$dialog.find('.modal-header>h'+config.headerSize))
 				        },timeout)
 			        }
 				return setInterval(function(){
-					messages.call($dialog,$dialog.find('.modal-header>h'+settings.headerSize))
+					messages.call($dialog,$dialog.find('.modal-header>h'+config.headerSize))
 				},timer);
 			}
 			
