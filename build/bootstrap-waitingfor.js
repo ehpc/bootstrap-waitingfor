@@ -219,13 +219,28 @@
 		* stop job with specified id .
 		   if no id specified , stopAnimate will stop the last running job . 
 		*@param id
-		
+		* @author Abdennour TOUMI <abdennour.toumi@gmail.com>
 		*/
 		 
 		stopAnimate:function(id){
 			 id=id || cache.animate[cache.animate.length-1];
 			 clearInterval(id);
 			 delete cache.animate[cache.animate.indexOf(id)];
+			return $dialog;
+		},
+		/*
+		* @param percentOrCurrent
+		* @param total
+		* Calling with : 
+		*   - One Argument --> "percentOrCurrent" is the percent of progress
+		*   - Two Argument ---> "percentOrCurrent" is the current amount, "total" is the total amount . 
+		*@author Abdennour TOUMI <abdennour.toumi@gmail.com>
+		*/
+		progress:function(percentOrCurrent,total){
+			if(total){
+				percentOrCurrent=parseInt(percentOrCurrent/total*100);
+			}
+			$dialog.find('.progress-bar').css('width',percentOrCurrent+'%');
 			return $dialog;
 		}		
 	};
