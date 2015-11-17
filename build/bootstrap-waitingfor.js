@@ -137,7 +137,68 @@
 			if (typeof $dialog !== 'undefined') {
 				$dialog.modal('hide');
 			}
+		},
+		/**
+		 * Changes or displays current dialog message
+		 */
+		message: function (newMessage) {
+			if (typeof $dialog !== 'undefined') {
+				if (typeof newMessage !== 'undefined') {
+					return $dialog.find('.modal-header>h'+settings.headerSize).html(newMessage);
+				}
+				else {
+					return $dialog.find('.modal-header>h'+settings.headerSize).html();
+				}
+			}
 		}
+		/**
+		 * animate the  message every period equals to 'timer',
+		 * and starts this animation after a delay equals to 'timeout'
+		 * 
+		 * 
+		 * @messages can be  : 
+		 *      - string : it will be an array , i.e: messages="waitings"--> messages=["waiting..","waiting....",""waiting"......"]
+		 *      - array 
+		 *      - function 
+		 * @timer period
+		 * @timeout if it is 0 -> starts immediatly
+		 * */
+		,animate:function(messages,timer,timeout){
+			timer=timer || 500;
+			timeout=timeout||0;
+			if(typeof messages ==='string'){
+			   	
+			     messages=['..','....','......'].map(function(e){
+			     	return messages+e;
+			     })	;
+			}
+			
+			if(typeof messages ==='object' && messages instanceof Array){
+				messages=function(container){
+					var current=messages.indexOf(container.html());
+					if(current<0){
+						container.html(messages[0]);
+					}else{
+					      var indx=(current+1>messages.length)?0:current+1	
+					       container.html(messages[indx]);	
+						
+					}
+				}
+				
+			}
+			if(timeout<timer){
+				setTimeout(messages,timeout)
+			}
+			if(typeof messages ==="function"){
+				return setInterval(messages,timer);
+			}
+			
+			
+			
+		},stopAnimate:function(id){
+			return clearInterval(id);
+			
+		}		
 	};
 
 }));
