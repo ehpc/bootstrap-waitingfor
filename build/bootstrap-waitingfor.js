@@ -2,6 +2,7 @@
  * Module for displaying "Waiting for..." dialog using Bootstrap
  *
  * @author Eugene Maslovich <ehpc@em42.ru>
+ * 
  */
 
 (function (root, factory) {
@@ -44,8 +45,8 @@
 	}
 
 	// Dialog object
-	var $dialog;
-        var config;
+	var $dialog,config,cache={};
+        
 	return {
 		/**
 		 * Opens our dialog
@@ -142,6 +143,7 @@
 		},
 		/**
 		 * Changes or displays current dialog message
+		 * @author Abdennour TOUMI <abdennour.toumi@gmail.com>
 		 */
 		message: function (newMessage) {
 			if (typeof $dialog !== 'undefined') {
@@ -158,19 +160,21 @@
 		 * and starts this animation after a delay equals to 'timeout'
 		 * 
 		 * 
-		 * @messages can be  : 
+		 * @param messages can be  : 
 		 *      - string : it will be an array , i.e: messages="waitings"--> messages=["waiting..","waiting....",""waiting"......"]
 		 *      - array 
 		 *      - function 
-		 * @timer period
-		 * @timeout if it is 0 -> starts immediatly
+		 * @param timer period
+		 * @param timeout if it is 0 -> starts immediatly
 		 * 
 		 * @return id of periodic job
+		 * @author Abdennour TOUMI <abdennour.toumi@gmail.com>
 		 * */
 		,animate:function(messages,timer,timeout){
 			timer=timer ||config.timer;
 			timeout=timeout||config.timeout;
 			messages=messages||$dialog.message();
+			cache.animate=cache.animate || [];
 			if(typeof messages ==='string'){
 			     	
 			   	
@@ -200,16 +204,28 @@
 					     messages.call($dialog,$dialog.find('.modal-header>h'+config.headerSize))
 				        },timeout)
 			        }
-				return setInterval(function(){
+				var job= setInterval(function(){
 					messages.call($dialog,$dialog.find('.modal-header>h'+config.headerSize))
 				},timer);
+				cache.animate.push(job);
+				return job;
 			}
 			
 			
 			
-		},stopAnimate:function(id){
-			return clearInterval(id);
-			
+		},
+		/*
+		* stop job with specified id .
+		   if no id specified , stopAnimate will stop the last running job . 
+		*@param id
+		
+		*/
+		 
+		stopAnimate:function(id){
+			 id=id || cache.animate[cache.animate.length-1];
+			 clearInterval(id);
+			 delete cache.animate[cache.animate.indexOf(id)];
+			return $dialog;
 		}		
 	};
 
