@@ -45,7 +45,7 @@
 
 	// Dialog object
 	var $dialog;
-
+        var config;
 	return {
 		/**
 		 * Opens our dialog
@@ -79,11 +79,10 @@
 				progressType: '',
 				contentElement: 'p',
 				contentClass: 'content',
-				onHide: null, // This callback runs after the dialog was hidden
-				onShow: null // This callback runs after the dialog was shown
+				onHide: null // This callback runs after the dialog was hidden
 			}, options),
 			$headerTag, $contentTag;
-
+                        config=  settings;
 			$dialog = constructDialog($dialog);
 
 			// Configuring dialog
@@ -128,11 +127,6 @@
 					settings.onHide.call($dialog);
 				});
 			}
-			if (typeof settings.onShow === 'function') {
-				$dialog.off('shown.bs.modal').on('shown.bs.modal', function () {
-					settings.onShow.call($dialog);
-				});
-			}
 			// Opening dialog
 			$dialog.modal();
 		},
@@ -150,13 +144,69 @@
 		message: function (newMessage) {
 			if (typeof $dialog !== 'undefined') {
 				if (typeof newMessage !== 'undefined') {
-					return $dialog.find('.modal-header>h3').html(newMessage);
+					return $dialog.find('.modal-header>h'+config.headerSize).html(newMessage);
 				}
 				else {
-					return $dialog.find('.modal-header>h3').html();
+					return $dialog.find('.modal-header>h'+config.headerSize).html();
 				}
 			}
-		}	
+		}
+		/**
+		 * animate the  message every period equals to 'timer',
+		 * and starts this animation after a delay equals to 'timeout'
+		 * 
+		 * 
+		 * @messages can be  : 
+		 *      - string : it will be an array , i.e: messages="waitings"--> messages=["waiting..","waiting....",""waiting"......"]
+		 *      - array 
+		 *      - function 
+		 * @timer period
+		 * @timeout if it is 0 -> starts immediatly
+		 * 
+		 * @return id of periodic job
+		 * */
+		,animate:function(messages,timer,timeout){
+			timer=timer || 500;
+			timeout=timeout||0;
+			if(typeof messages ==='string'){
+			   	
+			     messages=['..','....','......'].map(function(e){
+			     	return messages+e;
+			     })	;
+			}
+			
+			if(typeof messages ==='object' && messages instanceof Array){
+				var old=messages;
+				messages=function(container){
+					var current=old.indexOf(container.html());
+					if(current<0){
+						container.html(old[0]);
+					}else{
+					      var indx=(current+1>=old.length)?0:current+1	
+					       container.html(old[indx]);	
+						
+					}
+				}
+				
+			}
+		
+			if(typeof messages ==="function"){
+				if(timeout<timer){
+				        setTimeout(function(){
+					     messages.call($dialog,$dialog.find('.modal-header>h'+config.headerSize))
+				        },timeout)
+			        }
+				return setInterval(function(){
+					messages.call($dialog,$dialog.find('.modal-header>h'+config.headerSize))
+				},timer);
+			}
+			
+			
+			
+		},stopAnimate:function(id){
+			return clearInterval(id);
+			
+		}		
 	};
 
 }));
