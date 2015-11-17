@@ -173,6 +173,7 @@
 		,animate:function(messages,timer,timeout){
 			timer=timer ||config.timer;
 			timeout=timeout||config.timeout;
+			console.log($dialog)
 			messages=messages||$dialog.message();
 			cache.animate=cache.animate || [];
 			if(typeof messages ==='string'){
