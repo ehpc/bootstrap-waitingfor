@@ -232,11 +232,15 @@
 		* @param percentOrCurrent
 		* @param total
 		* Calling with : 
+		*   - No Arguement --> get the current progress
 		*   - One Argument --> "percentOrCurrent" is the percent of progress
 		*   - Two Argument ---> "percentOrCurrent" is the current amount, "total" is the total amount . 
 		*@author Abdennour TOUMI <abdennour.toumi@gmail.com>
 		*/
 		progress:function(percentOrCurrent,total){
+			if(!arguments.length){
+				return parseInt($dialog.find('.progress-bar').css('width'));
+			}
 			if(total){
 				percentOrCurrent=parseInt(percentOrCurrent/total*100);
 			}
