@@ -162,6 +162,8 @@
 		 *      - function 
 		 * @timer period
 		 * @timeout if it is 0 -> starts immediatly
+		 * 
+		 * @return id of periodic job
 		 * */
 		,animate:function(messages,timer,timeout){
 			timer=timer || 500;
@@ -174,13 +176,14 @@
 			}
 			
 			if(typeof messages ==='object' && messages instanceof Array){
+				var old=messages;
 				messages=function(container){
-					var current=messages.indexOf(container.html());
+					var current=old.indexOf(container.html());
 					if(current<0){
-						container.html(messages[0]);
+						container.html(old[0]);
 					}else{
-					      var indx=(current+1>messages.length)?0:current+1	
-					       container.html(messages[indx]);	
+					      var indx=(current+1>old.length)?0:current+1	
+					       container.html(old[indx]);	
 						
 					}
 				}
