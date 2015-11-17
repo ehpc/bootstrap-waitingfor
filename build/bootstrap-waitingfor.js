@@ -150,10 +150,10 @@
 		message: function (newMessage) {
 			if (typeof $dialog !== 'undefined') {
 				if (typeof newMessage !== 'undefined') {
-					return $dialog.find('.modal-header>h3').html(newMessage);
+					return $dialog.find('.modal-header>h'+settings.headerSize).html(newMessage);
 				}
 				else {
-					return $dialog.find('.modal-header>h3').html();
+					return $dialog.find('.modal-header>h'+settings.headerSize).html();
 				}
 			}
 		}	
