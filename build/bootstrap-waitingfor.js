@@ -79,6 +79,8 @@
 				progressType: '',
 				contentElement: 'p',
 				contentClass: 'content',
+				timer:500, //useful for animate function
+				timeout:0,//useful for animate function
 				onHide: null // This callback runs after the dialog was hidden
 			}, options),
 			$headerTag, $contentTag;
@@ -166,9 +168,11 @@
 		 * @return id of periodic job
 		 * */
 		,animate:function(messages,timer,timeout){
-			timer=timer || 500;
-			timeout=timeout||0;
+			timer=timer ||config.timer;
+			timeout=timeout||config.timeout;
+			messages=messages||$dialog.message();
 			if(typeof messages ==='string'){
+			     	
 			   	
 			     messages=['..','....','......'].map(function(e){
 			     	return messages+e;
