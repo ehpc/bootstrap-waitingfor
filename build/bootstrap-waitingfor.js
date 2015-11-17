@@ -2,6 +2,7 @@
  * Module for displaying "Waiting for..." dialog using Bootstrap
  *
  * @author Eugene Maslovich <ehpc@em42.ru>
+ * 
  */
 
 (function (root, factory) {
@@ -44,8 +45,8 @@
 	}
 
 	// Dialog object
-	var $dialog;
-
+	var $dialog,config,cache={};
+        
 	return {
 		/**
 		 * Opens our dialog
@@ -79,11 +80,12 @@
 				progressType: '',
 				contentElement: 'p',
 				contentClass: 'content',
-				onHide: null, // This callback runs after the dialog was hidden
-				onShow: null // This callback runs after the dialog was shown
+				timer:500, //useful for animate function
+				timeout:0,//useful for animate function
+				onHide: null // This callback runs after the dialog was hidden
 			}, options),
 			$headerTag, $contentTag;
-
+                        config=  settings;
 			$dialog = constructDialog($dialog);
 
 			// Configuring dialog
@@ -128,11 +130,6 @@
 					settings.onHide.call($dialog);
 				});
 			}
-			if (typeof settings.onShow === 'function') {
-				$dialog.off('shown.bs.modal').on('shown.bs.modal', function () {
-					settings.onShow.call($dialog);
-				});
-			}
 			// Opening dialog
 			$dialog.modal();
 		},
@@ -146,17 +143,106 @@
 		},
 		/**
 		 * Changes or displays current dialog message
+		 * @author Abdennour TOUMI <abdennour.toumi@gmail.com>
 		 */
 		message: function (newMessage) {
 			if (typeof $dialog !== 'undefined') {
 				if (typeof newMessage !== 'undefined') {
-					return $dialog.find('.modal-header>h3').html(newMessage);
+					return $dialog.find('.modal-header>h'+config.headerSize).html(newMessage);
 				}
 				else {
-					return $dialog.find('.modal-header>h3').html();
+					return $dialog.find('.modal-header>h'+config.headerSize).html();
 				}
 			}
-		}	
+		}
+		/**
+		 * animate the  message every period equals to 'timer',
+		 * and starts this animation after a delay equals to 'timeout'
+		 * 
+		 * 
+		 * @param messages can be  : 
+		 *      - string : it will be an array , i.e: messages="waitings"--> messages=["waiting..","waiting....",""waiting"......"]
+		 *      - array 
+		 *      - function 
+		 * @param timer period
+		 * @param timeout if it is 0 -> starts immediatly
+		 * 
+		 * @return id of periodic job
+		 * @author Abdennour TOUMI <abdennour.toumi@gmail.com>
+		 * */
+		,animate:function(messages,timer,timeout){
+			timer=timer ||config.timer;
+			timeout=timeout||config.timeout;
+			
+			messages=messages||$dialog.find('.modal-header>h'+config.headerSize).html();
+			cache.animate=cache.animate || [];
+			if(typeof messages ==='string'){
+			     	
+			   	
+			     messages=['..','....','......'].map(function(e){
+			     	return messages+e;
+			     })	;
+			}
+			
+			if(typeof messages ==='object' && messages instanceof Array){
+				var old=messages;
+				messages=function(container){
+					var current=old.indexOf(container.html());
+					if(current<0){
+						container.html(old[0]);
+					}else{
+					      var indx=(current+1>=old.length)?0:current+1	
+					       container.html(old[indx]);	
+						
+					}
+				}
+				
+			}
+		
+			if(typeof messages ==="function"){
+				if(timeout<timer){
+				        setTimeout(function(){
+					     messages.call($dialog,$dialog.find('.modal-header>h'+config.headerSize))
+				        },timeout)
+			        }
+				var job= setInterval(function(){
+					messages.call($dialog,$dialog.find('.modal-header>h'+config.headerSize))
+				},timer);
+				cache.animate.push(job);
+				return job;
+			}
+			
+			
+			
+		},
+		/*
+		* stop job with specified id .
+		   if no id specified , stopAnimate will stop the last running job . 
+		*@param id
+		* @author Abdennour TOUMI <abdennour.toumi@gmail.com>
+		*/
+		 
+		stopAnimate:function(id){
+			 id=id || cache.animate[cache.animate.length-1];
+			 clearInterval(id);
+			 delete cache.animate[cache.animate.indexOf(id)];
+			return $dialog;
+		},
+		/*
+		* @param percentOrCurrent
+		* @param total
+		* Calling with : 
+		*   - One Argument --> "percentOrCurrent" is the percent of progress
+		*   - Two Argument ---> "percentOrCurrent" is the current amount, "total" is the total amount . 
+		*@author Abdennour TOUMI <abdennour.toumi@gmail.com>
+		*/
+		progress:function(percentOrCurrent,total){
+			if(total){
+				percentOrCurrent=parseInt(percentOrCurrent/total*100);
+			}
+			$dialog.find('.progress-bar').css('width',percentOrCurrent+'%');
+			return $dialog;
+		}		
 	};
 
 }));
