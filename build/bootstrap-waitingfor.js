@@ -173,8 +173,8 @@
 		,animate:function(messages,timer,timeout){
 			timer=timer ||config.timer;
 			timeout=timeout||config.timeout;
-			console.log($dialog)
-			messages=messages||$dialog.message();
+			
+			messages=messages||$dialog.find('.modal-header>h'+config.headerSize).html();
 			cache.animate=cache.animate || [];
 			if(typeof messages ==='string'){
 			     	
