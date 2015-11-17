@@ -239,7 +239,7 @@
 		*/
 		progress:function(percentOrCurrent,total){
 			if(!arguments.length){
-				return parseInt($dialog.find('.progress-bar')[0].style.width;);
+				return parseInt($dialog.find('.progress-bar')[0].style.width);
 			}
 			if(total){
 				percentOrCurrent=parseInt(percentOrCurrent/total*100);
