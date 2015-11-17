@@ -186,11 +186,16 @@
 				}
 				
 			}
-			if(timeout<timer){
-				setTimeout(messages,timeout)
-			}
+		
 			if(typeof messages ==="function"){
-				return setInterval(messages,timer);
+				if(timeout<timer){
+				        setTimeout(function(){
+					     messages.call($dialog,$dialog.find('.modal-header>h'+settings.headerSize))
+				        },timeout)
+			        }
+				return setInterval(function(){
+					messages.call($dialog,$dialog.find('.modal-header>h'+settings.headerSize))
+				},timer);
 			}
 			
 			
