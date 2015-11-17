@@ -182,7 +182,7 @@
 					if(current<0){
 						container.html(old[0]);
 					}else{
-					      var indx=(current+1>old.length)?0:current+1	
+					      var indx=(current+1>=old.length)?0:current+1	
 					       container.html(old[indx]);	
 						
 					}
