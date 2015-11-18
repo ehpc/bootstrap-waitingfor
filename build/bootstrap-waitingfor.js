@@ -80,6 +80,7 @@
 				progressType: '',
 				contentElement: 'p',
 				contentClass: 'content',
+				rtl:true,
 				timer:500, //useful for animate function
 				timeout:0,//useful for animate function
 				onHide: null // This callback runs after the dialog was hidden
@@ -94,7 +95,9 @@
 			if (settings.progressType) {
 				$dialog.find('.progress-bar').addClass('progress-bar-' + settings.progressType);
 			}
-
+                       if(settings.rtl){
+                       	      $dialog.find('.progress-bar').css('float','right').end().attr('dir','rtl')
+                       }
 			// Generate header tag
 			$headerTag = $('<h' + settings.headerSize + ' />');
 			$headerTag.css({ 'margin': 0 });
