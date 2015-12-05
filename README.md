@@ -36,6 +36,8 @@ Before making a pull request do the following steps:
 Setting up the environment:
 
 1. Run `npm install`
+2. Run `npm install -g bower`
+3. Run `npm install -g gulp`
 2. Run `bower install`
 
 ##Examples
