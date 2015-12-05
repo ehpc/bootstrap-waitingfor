@@ -25,7 +25,7 @@ See `src/waitingfor.js` for additional options.
 
 ##Contributing
 
-Before making a pull request do the following steps:
+:fire:Before:fire: making a pull request do the following steps:
 
 1. Run `gulp`
 2. Make sure `gulp` doesn't return any errors
