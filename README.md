@@ -35,10 +35,12 @@ See `src/waitingfor.js` for additional options.
 
 Setting up the environment:
 
-1. Run `npm install`
-2. Run `npm install -g bower`
-3. Run `npm install -g gulp`
-2. Run `bower install`
+1. Install `Node.js`
+2. Go to your project directory
+3. Run `npm install -g bower`
+4. Run `npm install -g gulp`
+5. Run `npm install`
+6. Run `bower install`
 
 ##Examples
 
