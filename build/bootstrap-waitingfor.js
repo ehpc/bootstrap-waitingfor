@@ -43,23 +43,23 @@
 		);
 	}
 
-	// Dialog object
-	var $dialog;
+	var $dialog, // Dialog object
+		settings; // Dialog settings
 
 	return {
 		/**
 		 * Opens our dialog
 		 * @param message Custom message
 		 * @param options Custom options:
-		 *   options.headerText - if the option is set to boolean false, 
+		 *   options.headerText - if the option is set to boolean false,
 		 *     it will hide the header and "message" will be set in a paragraph above the progress bar.
-		 *     When headerText is a not-empty string, "message" becomes a content 
+		 *     When headerText is a not-empty string, "message" becomes a content
 		 *     above the progress bar and headerText string will be set as a text inside the H3;
 		 *   options.headerSize - this will generate a heading corresponding to the size number. Like <h1>, <h2>, <h3> etc;
 		 *   options.headerClass - extra class(es) for the header tag;
 		 *   options.dialogSize - bootstrap postfix for dialog size, e.g. "sm", "m";
 		 *   options.progressType - bootstrap postfix for progress bar type, e.g. "success", "warning";
-		 *   options.contentElement - determines the tag of the content element. 
+		 *   options.contentElement - determines the tag of the content element.
 		 *     Defaults to "p", which will generate a <p> tag;
 		 *   options.contentClass - extra class(es) for the content tag.
 		 */
@@ -71,7 +71,7 @@
 			if (typeof message === 'undefined') {
 				message = 'Loading';
 			}
-			var settings = $.extend({
+			settings = $.extend({
 				headerText: '',
 				headerSize: 3,
 				headerClass: '',
@@ -81,8 +81,9 @@
 				contentClass: 'content',
 				onHide: null, // This callback runs after the dialog was hidden
 				onShow: null // This callback runs after the dialog was shown
-			}, options),
-			$headerTag, $contentTag;
+			}, options);
+
+			var $headerTag, $contentTag;
 
 			$dialog = constructDialog($dialog);
 
@@ -150,14 +151,13 @@
 		message: function (newMessage) {
 			if (typeof $dialog !== 'undefined') {
 				if (typeof newMessage !== 'undefined') {
-					return $dialog.find('.modal-header>h3').html(newMessage);
+					return $dialog.find('.modal-header>h' + settings.headerSize).html(newMessage);
 				}
 				else {
-					return $dialog.find('.modal-header>h3').html();
+					return $dialog.find('.modal-header>h' + settings.headerSize).html();
 				}
 			}
-		}	
+		}
 	};
 
 }));
-
