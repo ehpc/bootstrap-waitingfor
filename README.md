@@ -42,6 +42,8 @@ Setting up the environment:
 5. Run `npm install`
 6. Run `bower install`
 
+:sunflower:You sould only modify files inside `src` or `test` directories!:sunflower:
+
 ##Examples
 
 HTML page example:
