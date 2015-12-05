@@ -80,7 +80,21 @@ describe('Dialog testing', function () {
 						expect(waitingDialog.message()).to.be.equal('Custom message 5');
 						waitingDialog.message('Changed message');
 						expect(waitingDialog.message()).to.be.equal('Changed message');
-						done();
+					}
+				});
+				setTimeout(function () {
+					waitingDialog.hide();
+					done();
+				}, 700);
+			}, 300);
+		});
+		
+		it('testing "message" method with custom headerSize', function (done) {
+			setTimeout(function () {
+				waitingDialog.show('Custom message 6', {
+					headerSize: 1,
+					onShow: function () {
+						expect(waitingDialog.message()).to.be.equal('Custom message 6');
 					}
 				});
 				setTimeout(function () {

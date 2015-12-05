@@ -28,11 +28,12 @@
     "validateQuoteMarks": { "mark": "'", "escape": true },
 
     "disallowMixedSpacesAndTabs": "smart",
-    //"disallowTrailingWhitespace": true,
+    "disallowTrailingWhitespace": true,
     "disallowMultipleLineStrings": true,
     "disallowTrailingComma": true,
     "disallowSpaceBeforeComma": true,
 
+	"requireMultipleVarDecl": true,
     "requireSpaceBeforeBlockStatements": true,
     "requireSpacesInFunctionExpression": {
         "beforeOpeningCurlyBrace": true
@@ -60,8 +61,11 @@
         "|", "^", "&&", "||", "===", "==", ">=",
         "<=", "<", ">", "!=", "!=="
     ],
+	"disallowOperatorBeforeLineBreak": ["."],
     "requireSpacesInAnonymousFunctionExpression": {
-        "beforeOpeningCurlyBrace": true
+        "beforeOpeningCurlyBrace": true,
+		"beforeOpeningRoundBrace": true,
+		"allExcept": ["shorthand"]
     },
     "requireSpacesInNamedFunctionExpression": {
         "beforeOpeningCurlyBrace": true
