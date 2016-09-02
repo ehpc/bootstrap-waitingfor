@@ -1,12 +1,12 @@
 {
   "name": "bootstrap-waitingfor",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "homepage": "https://github.com/ehpc/bootstrap-waitingfor",
   "authors": [
     "Eugene Maslovich <ehpc@ehpc.io>"
   ],
   "description": "Waiting for dialog with progress bar for Bootstrap",
-  "main": "src/boostrap-waitingfor.js",
+  "main": "src/bootstrap-waitingfor.js",
   "moduleType": [
     "amd",
     "globals"
