@@ -33,7 +33,7 @@
 					'<div class="modal-content">' +
 						'<div class="modal-header waitingfor-header"></div>' +
 						'<div class="modal-body">' +
-							'<div class="progress progress-bar-light-blue progress-bar-striped waitingfor-progress active">' +
+							'<div class="progress progress-bar-info progress-bar-striped waitingfor-progress active">' +
 								'<div class="progress-bar waitingfor-progress-bar" role="progressbar"></div>' +
 							'</div>' +
 						'</div>' +
