@@ -28,13 +28,13 @@
 			$dialog.remove();
 		}
 		return $(
-			'<div class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top:15%; overflow-y:visible;">' +
-				'<div class="modal-dialog modal-m">' +
+			'<div class="modal fade waitingfor-modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">' +
+				'<div class="modal-dialog modal-m waitingfor-dialog">' +
 					'<div class="modal-content">' +
-						'<div class="modal-header" style="display: none;"></div>' +
+						'<div class="modal-header waitingfor-header"></div>' +
 						'<div class="modal-body">' +
-							'<div class="progress progress-striped active" style="margin-bottom:0;">' +
-								'<div class="progress-bar" style="width: 100%"></div>' +
+							'<div class="progress progress-bar-light-blue progress-bar-striped waitingfor-progress active">' +
+								'<div class="progress-bar waitingfor-progress-bar" role="progressbar"></div>' +
 							'</div>' +
 						'</div>' +
 					'</div>' +
