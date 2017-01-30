@@ -1,0 +1,18 @@
+.waitingfor-modal {
+	padding-top:15%;
+	overflow-y:visible;
+}
+.waitingfor-header {
+	display: none;
+}
+.waitingfor-progress {
+	margin-bottom:0;
+}
+.waitingfor-progress-bar {
+	width: 100%;
+}
+.waitingfor-progress.active {
+    -webkit-animation: progress-bar-stripes 2s linear infinite;
+    -o-animation: progress-bar-stripes 2s linear infinite;
+    animation: progress-bar-stripes 2s linear infinite
+}
