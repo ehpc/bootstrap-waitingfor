@@ -1,15 +1,15 @@
-#bootstrap-waitingfor
+# bootstrap-waitingfor
 
 "Waiting for..." modal dialog with progress bar for Bootstrap.
 
 See this plugin in action:rocket:: http://bootsnipp.com/snippets/featured/quotwaiting-forquot-modal-dialog
 
-##Features
+## Features
 
 * AMD-compatible
 * Configurable
 
-##Using
+## Using
 
 You can install this module with bower `bower install bootstrap-waitingfor` and include the files from `build` directory.
 
@@ -23,7 +23,7 @@ setTimeout(function () {
 
 See `src/waitingfor.js` for additional options.
 
-##Contributing
+## Contributing
 
 :fire:Before:fire: making a pull request do the following steps:
 
@@ -44,7 +44,7 @@ Setting up the environment:
 
 :sunflower:You should only modify files inside `src` or `test` directories!:sunflower: Files in the `build` directory are generated **automatically** after running `gulp`.
 
-##Examples
+## Examples
 
 HTML page example:
 ```html
