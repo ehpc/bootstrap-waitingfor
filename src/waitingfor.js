@@ -89,7 +89,7 @@
 
 			// Configuring dialog
 			$dialog.find('.modal-dialog').attr('class', 'modal-dialog').addClass('modal-' + settings.dialogSize);
-			$dialog.find('.progress-bar').attr('class', 'progress-bar');
+			$dialog.find('.progress-bar').attr('class', 'progress-bar progress-bar-striped progress-bar-animated');
 			if (settings.progressType) {
 				$dialog.find('.progress-bar').addClass('progress-bar-' + settings.progressType);
 			}
