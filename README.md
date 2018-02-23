@@ -9,9 +9,21 @@ See this plugin in action:rocket:: http://bootsnipp.com/snippets/featured/quotwa
 * AMD-compatible
 * Configurable
 
-## Using
+## Installing
+
+### With bower
 
 You can install this module with bower `bower install bootstrap-waitingfor` and include the files from `build` directory.
+
+### With npm
+
+You can install this module typing the command `npm install --save bootstrap-waitingfor` and including as below:
+
+```js
+const waitingDialog = require('bootstrap-waitingfor');
+```
+
+## Using
 
 In your javascript code write something like this:
 ```js
