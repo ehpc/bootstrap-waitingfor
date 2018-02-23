@@ -17,7 +17,7 @@ You can install this module with bower `bower install bootstrap-waitingfor` and 
 
 ### With npm
 
-You can install this module typing the command `npm install --save bootstrap-waitingfor` and including as below:
+You can install this module with npm `npm install --save bootstrap-waitingfor` and include it as shown:
 
 ```js
 const waitingDialog = require('bootstrap-waitingfor');
