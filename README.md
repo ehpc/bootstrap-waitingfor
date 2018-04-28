@@ -33,7 +33,27 @@ setTimeout(function () {
 }, 1000);
 ```
 
-See `src/waitingfor.js` for additional options.
+If you want to change the appearance of the modal, you can pass additional options:
+
+```js
+waitingDialog.show('I\'m waiting', {
+  dialogSize: 'm',
+  progressType: 'success'
+});
+setTimeout(function () {
+  waitingDialog.hide();
+}, 1000);
+```
+possible options for `dialogSize` are 
+* `sm` - small
+* `m` - normal
+* `lg` - large
+
+possible options for progressType are
+* `success`
+* `danger`
+* `warning`
+* `info`
 
 ## Contributing
 
