@@ -22,25 +22,26 @@
 	/**
 	 * Dialog DOM constructor
 	 */
-	function constructDialog($dialog) {
+	function constructDialog($dialog, settings) {
 		// Deleting previous incarnation of the dialog
 		if ($dialog) {
 			$dialog.remove();
 		}
-		return $(
-			'<div class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top:15%; overflow-y:visible;">' +
+		var nonceAttr = settings.nonce === null ? '' : ' nonce="' + settings.nonce + '"';
+		var elem = $.parseHTML(
+			'<div class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top:15%; overflow-y:visible;"' + nonceAttr + '>' +
 				'<div class="modal-dialog modal-m">' +
 					'<div class="modal-content">' +
-						'<div class="modal-header" style="display: none;"></div>' +
+						'<div class="modal-header" style="display: none;"' + nonceAttr + '></div>' +
 						'<div class="modal-body">' +
-							'<div class="progress progress-striped active" style="margin-bottom:0;">' +
-								'<div class="progress-bar" style="width: 100%"></div>' +
+							'<div class="progress progress-striped active" style="margin-bottom:0;"' + nonceAttr + '>' +
+								'<div class="progress-bar" style="width: 100%"' + nonceAttr + '></div>' +
 							'</div>' +
 						'</div>' +
 					'</div>' +
 				'</div>' +
-			'</div>'
-		);
+			'</div>');
+		return $(elem);
 	}
 
 	var $dialog, // Dialog object
@@ -80,12 +81,13 @@
 				contentElement: 'p',
 				contentClass: 'content',
 				onHide: null, // This callback runs after the dialog was hidden
-				onShow: null // This callback runs after the dialog was shown
+				onShow: null, // This callback runs after the dialog was shown
+				nonce: null // Nonce to permit inline styles
 			}, options);
 
 			var $headerTag, $contentTag;
 
-			$dialog = constructDialog($dialog);
+			$dialog = constructDialog($dialog, settings);
 
 			// Configuring dialog
 			$dialog.find('.modal-dialog').attr('class', 'modal-dialog').addClass('modal-' + settings.dialogSize);
