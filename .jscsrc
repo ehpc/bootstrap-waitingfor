@@ -1,7 +1,5 @@
 {
-    "validateIndentation": {
-        "value": "\t"
-    },
+    "validateIndentation": 4,
     "requireCurlyBraces": [
         "if",
         "else",
