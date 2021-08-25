@@ -27,22 +27,26 @@
         if ($dialog) {
             $dialog.remove();
         }
+        if($("#modal-waitingfor").length > 0){
+            $("#modal-waitingfor").remove();
+        }
         var nonceAttr = settings.nonce === null ? '' : ' nonce="' + settings.nonce + '"',
             elem = $.parseHTML(
-                '<div class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top:15%; overflow-y:visible;"' + nonceAttr + '>' +
-                    '<div class="modal-dialog modal-m">' +
-                        '<div class="modal-content">' +
-                            '<div class="modal-header" style="display: none;"' + nonceAttr + '></div>' +
-                            '<div class="modal-body">' +
-                                '<div class="progress progress-striped active" style="margin-bottom:0;"' + nonceAttr + '>' +
-                                    '<div class="progress-bar" style="width: 100%"' + nonceAttr + '></div>' +
-                                '</div>' +
-                            '</div>' +
-                        '</div>' +
-                    '</div>' +
+                '<div id="modal-waitingfor" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top:15%; overflow-y:visible;"' + nonceAttr + '>' +
+                '<div class="modal-dialog modal-m">' +
+                '<div class="modal-content">' +
+                '<div class="modal-header" style="display: none;"' + nonceAttr + '></div>' +
+                '<div class="modal-body">' +
+                '<div class="progress progress-striped active" style="margin-bottom:0;"' + nonceAttr + '>' +
+                '<div class="progress-bar" style="width: 100%"' + nonceAttr + '></div>' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
                 '</div>'
             );
-        return $(elem);
+            $("body").append(elem);
+        return $("#modal-waitingfor");
     }
 
     var $dialog, // Dialog object
@@ -139,11 +143,13 @@
                 });
             }
             // Opening dialog
-            $dialog.modal();
+            var modal = new bootstrap.Modal(document.getElementById("modal-waitingfor"));
+            //$dialog.modal();
             // Trace if dialog is shown
-            $dialog.on('shown.bs.modal', function () {
+            $dialog.on('shown.bs.modal', function (event) {
                 $dialog.data('shown', true);
             });
+            modal.show();
         },
         /**
          * Closes dialog
