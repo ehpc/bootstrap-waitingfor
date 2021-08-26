@@ -27,9 +27,12 @@
         if ($dialog) {
             $dialog.remove();
         }
-        var nonceAttr = settings.nonce === null ? '' : ' nonce="' + settings.nonce + '"',
+        $('#bootstrapWaitingforModal').remove();
+        var nonceAttr = settings.nonce === null ? ''
+            : ' nonce="' + settings.nonce + '"',
             elem = $.parseHTML(
-                '<div class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top:15%; overflow-y:visible;"' + nonceAttr + '>' +
+                '<div id="bootstrapWaitingforModal" class="modal fade" ' +
+                'data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top:15%; overflow-y:visible;"' + nonceAttr + '>' +
                     '<div class="modal-dialog modal-m">' +
                         '<div class="modal-content">' +
                             '<div class="modal-header" style="display: none;"' + nonceAttr + '></div>' +
@@ -42,11 +45,14 @@
                     '</div>' +
                 '</div>'
             );
-        return $(elem);
+        $('body').append(elem);
+        return $('#bootstrapWaitingforModal');
     }
 
     var $dialog, // Dialog object
-        settings; // Dialog settings
+        settings, // Dialog settings
+        modalEl, // Modal DOM element
+        modal; // Bootstrap modal object
 
     return {
         /**
@@ -138,8 +144,21 @@
                     settings.onShow.call($dialog);
                 });
             }
+
             // Opening dialog
             $dialog.modal();
+
+            modalEl = document.getElementById('bootstrapWaitingforModal');
+            if (window.bootstrap && window.bootstrap.Modal && window.bootstrap.Modal.getOrCreateInstance) {
+                modal = window.bootstrap.Modal.getOrCreateInstance(modalEl);
+                modal.show();
+            }
+
+            if (modal) {
+                modalEl.addEventListener('shown.bs.modal', function () {
+                    $dialog.data('shown', true);
+                });
+            }
             // Trace if dialog is shown
             $dialog.on('shown.bs.modal', function () {
                 $dialog.data('shown', true);
@@ -152,18 +171,32 @@
         hide: function (cb) {
             if (typeof $dialog !== 'undefined') {
                 if ($dialog.data('shown') === true) {
-                    $dialog.modal('hide');
+                    if (modal) {
+                        modal.hide();
+                    }
+                    else {
+                        $dialog.modal('hide');
+                    }
                     if (cb) {
                         cb($dialog);
                     }
                 }
                 else {
-                    $dialog.on('shown.bs.modal', function () {
-                        $dialog.modal('hide');
-                        if (cb) {
-                            cb($dialog);
-                        }
-                    });
+                    if (modal) {
+                        modalEl.addEventListener('shown.bs.modal', function () {
+                            modal.hide();
+                            if (cb) {
+                                cb($dialog);
+                            }
+                        });
+                    } else {
+                        $dialog.on('shown.bs.modal', function () {
+                            $dialog.modal('hide');
+                            if (cb) {
+                                cb($dialog);
+                            }
+                        });
+                    }
                 }
             }
         },

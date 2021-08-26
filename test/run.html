@@ -1,21 +1,25 @@
 <html>
+
 <head>
 	<meta charset="utf-8">
 	<title>Testing boostrap-waitingfor</title>
 	<link href="../node_modules/mocha/mocha.css" rel="stylesheet" />
-	<link href="../bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-	<link href="../bower_components/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 </head>
+
 <body>
 	<div id="mocha"></div>
 
 	<script src="../bower_components/jquery/dist/jquery.min.js"></script>
-	<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+		crossorigin="anonymous"></script>
 	<script src="../node_modules/mocha/mocha.js"></script>
 	<script src="../node_modules/chai/chai.js"></script>
 
 	<script>mocha.setup('bdd')</script>
-	<script src="../build/bootstrap-waitingfor.js"></script>
+	<script src="../src/waitingfor.js"></script>
 	<script src="waitingfor.test.js"></script>
 	<script>
 		mocha.checkLeaks();
@@ -23,4 +27,5 @@
 		mocha.run();
 	</script>
 </body>
+
 </html>
