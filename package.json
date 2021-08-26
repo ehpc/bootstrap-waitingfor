@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-waitingfor",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "description": "Waiting for dialog with progress bar for Bootstrap",
   "main": "build/bootstrap-waitingfor.js",
   "dependencies": {
