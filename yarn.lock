@@ -879,7 +879,7 @@ dateformat@^2.0.0:
 debug@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.0.0.tgz#89bd9df6732b51256bc6705342bba02ed12131ef"
-  integrity sha1-ib2d9nMrUSVrxnBTQrugLtEhMe8=
+  integrity sha512-jRxFR0Fb657ikmm6IjHY32v/Nqp9Ndcx4LBISXPfpguNaHh5JJnb+x37qalKPTu4fxMFnVBIyEGi72mmvl0BCw==
   dependencies:
     ms "0.6.2"
 
@@ -2728,7 +2728,7 @@ mkdirp@0.x.x, mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0:
 mocha@2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/mocha/-/mocha-2.3.0.tgz#4ceff02d1e169c3261a1908d705afb282611cb7c"
-  integrity sha1-TO/wLR4WnDJhoZCNcFr7KCYRy3w=
+  integrity sha512-pXAR+XcISUG0JmOArNM9WyvDGiXPG409fJo59+vWdLifSlfxsJZqEagnDDvO/W8E4jGMUhykJL3HnUEOW64OPg==
   dependencies:
     commander "2.3.0"
     debug "2.0.0"
